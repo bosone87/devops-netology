@@ -21,3 +21,5 @@
 #
 # .terraformrc - игнор данного файла
 # terraform.rc - игнор данного файла
+#
+# new line
