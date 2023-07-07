@@ -1,13 +1,14 @@
  
 1. aefead2207ef7e2aa5dc81a34aedf0cad4c32545 - Update CHANGELOG.md
-2. 
-- 85024d3100126de36331c6982bfaac02cdab9e76 - v0.12.23
 
-- 2 parents:
+2. 
+a) 85024d3100126de36331c6982bfaac02cdab9e76 - v0.12.23
+
+b) 2 parents:
 	9ea88f22fc6269854151c571162c5bcf958bee2b
 	56cd7859e05c36c06b56d013b55a252d0bb7e158
 
-- 
+c)
 33ff1c03bb v0.12.24
 b14b74c493 [Website] vmc provider links
 3f235065b9 Update CHANGELOG.md
@@ -20,124 +21,22 @@ dd01a35078 Update CHANGELOG.md
 225466bc3e Cleanup after v0.12.23 release
 85024d3100 v0.12.23
 
-- 8c928e83589d90a031f811fae52a81be7153e82f
+d) 8c928e83589d90a031f811fae52a81be7153e82f
 
-- all commits:
+f) all commits:
 	78b12205587fe839f10d946ea3fdc06719decb05
-diff --git a/plugins.go b/plugins.go
---- a/plugins.go
-+++ b/plugins.go
-@@ -16,14 +18,14 @@
- func globalPluginDirs() []string {
- 	var ret []string
- 	// Look in ~/.terraform.d/plugins/ , or its equivalent on non-UNIX
--	dir, err := ConfigDir()
-+	dir, err := cliconfig.ConfigDir()
- 	if err != nil {
- 		log.Printf("[ERROR] Error finding global config directory: %s", err)
- 	} else {
- 		machineDir := fmt.Sprintf("%s_%s", runtime.GOOS, runtime.GOARCH)
- 		ret = append(ret, filepath.Join(dir, "plugins"))
- 		ret = append(ret, filepath.Join(dir, "plugins", machineDir))
- 	}
- 
- 	return ret
- }
+
 
 	52dbf94834cb970b510f2fba853a5b49ad9b1a46
-diff --git a/plugins.go b/plugins.go
---- a/plugins.go
-+++ b/plugins.go
-@@ -16,13 +16,14 @@
- func globalPluginDirs() []string {
- 	var ret []string
- 	// Look in ~/.terraform.d/plugins/ , or its equivalent on non-UNIX
- 	dir, err := ConfigDir()
- 	if err != nil {
- 		log.Printf("[ERROR] Error finding global config directory: %s", err)
- 	} else {
- 		machineDir := fmt.Sprintf("%s_%s", runtime.GOOS, runtime.GOARCH)
-+		ret = append(ret, filepath.Join(dir, "plugins"))
- 		ret = append(ret, filepath.Join(dir, "plugins", machineDir))
- 	}
- 
- 	return ret
- }
+
 
 	41ab0aef7a0fe030e84018973a64135b11abcd70
-diff --git a/plugins.go b/plugins.go
---- a/plugins.go
-+++ b/plugins.go
-@@ -14,12 +16,13 @@
- func globalPluginDirs() []string {
- 	var ret []string
- 	// Look in ~/.terraform.d/plugins/ , or its equivalent on non-UNIX
- 	dir, err := ConfigDir()
- 	if err != nil {
- 		log.Printf("[ERROR] Error finding global config directory: %s", err)
- 	} else {
--		ret = append(ret, filepath.Join(dir, "plugins"))
-+		machineDir := fmt.Sprintf("%s_%s", runtime.GOOS, runtime.GOARCH)
-+		ret = append(ret, filepath.Join(dir, "plugins", machineDir))
- 	}
- 
- 	return ret
- }
+
 
 	66ebff90cdfaa6938f26f908c7ebad8d547fea17
-diff --git a/plugins.go b/plugins.go
---- a/plugins.go
-+++ b/plugins.go
-@@ -16,22 +14,12 @@
- func globalPluginDirs() []string {
- 	var ret []string
--
--	// Look in the same directory as the Terraform executable.
--	// If found, this replaces what we found in the config path.
--	exePath, err := osext.Executable()
--	if err != nil {
--		log.Printf("[ERROR] Error discovering exe directory: %s", err)
--	} else {
--		ret = append(ret, filepath.Dir(exePath))
--	}
--
- 	// Look in ~/.terraform.d/plugins/ , or its equivalent on non-UNIX
- 	dir, err := ConfigDir()
- 	if err != nil {
- 		log.Printf("[ERROR] Error finding global config directory: %s", err)
- 	} else {
- 		ret = append(ret, filepath.Join(dir, "plugins"))
- 	}
- 
- 	return ret
- }
+
 
 	8364383c359a6b738a436d1b7745ccdce178df47
-diff --git a/plugins.go b/plugins.go
---- /dev/null
-+++ b/plugins.go
-@@ -0,0 +16,22 @@
-+func globalPluginDirs() []string {
-+	var ret []string
-+
-+	// Look in the same directory as the Terraform executable.
-+	// If found, this replaces what we found in the config path.
-+	exePath, err := osext.Executable()
-+	if err != nil {
-+		log.Printf("[ERROR] Error discovering exe directory: %s", err)
-+	} else {
-+		ret = append(ret, filepath.Dir(exePath))
-+	}
-+
-+	// Look in ~/.terraform.d/plugins/ , or its equivalent on non-UNIX
-+	dir, err := ConfigDir()
-+	if err != nil {
-+		log.Printf("[ERROR] Error finding global config directory: %s", err)
-+	} else {
-+		ret = append(ret, filepath.Join(dir, "plugins"))
-+	}
-+
-+	return ret
-+}
 
-- 5ac311e2a91e381e2f52234668b49ba670aa0fe5 - Martin Atkins - Wed May 3 16:25:41 2017 -0700
+
+g) 5ac311e2a91e381e2f52234668b49ba670aa0fe5 - Martin Atkins - Wed May 3 16:25:41 2017 -0700
