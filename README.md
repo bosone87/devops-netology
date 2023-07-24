@@ -1,34 +1,29 @@
 
-# Домашнее задание к занятию 4. «Оркестрация группой Docker-контейнеров на примере Docker Compose»
+# Домашнее задание к занятию 5. «Оркестрация кластером Docker контейнеров на примере Docker Swarm»
 
 ## Ответ №1
-<p align="center">
-  <img width="1200" height="600" src="/img/05-virt-04-docker-compose-1.png">
-</p>
+
+```
+- В режиме replication указывается количество сервисов при запуске, в global - будет запущено не более одного сервиса на каждом узле кластера.
+- Raft Consensus Algorithm - узлы усчаствующие в управлении кластером, гарантированно договариваются о состоянии кластера. Репликация состояния всех управляющих узлов при помощи журнала.
+- Overlay Network - виртуальная сеть, построенная поверх другой сети.
+```
 
 ## Ответ №2
-
-### 2.1.
 <p align="center">
-  <img width="1200" height="600" src="/img/05-virt-04-docker-compose-2.png">
-</p>
-
-### 2.2.
-<p align="center">
-  <img width="1200" height="600" src="/img/05-virt-04-docker-compose-2.2.png">
+  <img width="1200" height="600" src="/img/05-virt-05-docker-swarm-2.png">
 </p>
 
 ## Ответ №3
 <p align="center">
-  <img width="1200" height="600" src="/img/05-virt-04-docker-compose-3.png">
+  <img width="1200" height="600" src="/img/05-virt-05-docker-swarm-3.png">
 </p>
 
 ## Ответ №4
 <p align="center">
-  <img width="1200" height="600" src="/img/05-virt-04-docker-compose-4.png">
+  <img width="1200" height="600" src="/img/05-virt-05-docker-swarm-4.png">
 </p>
 
-## Ответ №5(*)
-<p align="center">
-  <img width="1200" height="600" src="/img/05-virt-04-docker-compose-5.png">
-</p>
+```
+docker swarm update --autolock=true - Логи Raft по умолчанию зашифрованны, ключ позволяет вручную шифровать и расшифровывать логи Raf на узлах.
+```
