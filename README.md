@@ -50,71 +50,18 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 {
   "version": 4,
   "terraform_version": "1.5.2",
-  "serial": 22,
+  "serial": 63,
   "lineage": "00d1ffe6-a1c5-daff-24f8-4e4df3a83b73",
   "outputs": {},
-  "resources": [
-    {
-      "mode": "managed",
-      "type": "docker_image",
-      "name": "nginx",
-      "provider": "provider[\"registry.terraform.io/kreuzwerker/docker\"]",
-      "instances": [
-        {
-          "schema_version": 0,
-          "attributes": {
-            "build": [],
-            "force_remove": null,
-            "id": "sha256:021283c8eb95be02b23db0de7f609d603553c6714785e7a673c6594a624ffbdanginx:latest",
-            "image_id": "sha256:021283c8eb95be02b23db0de7f609d603553c6714785e7a673c6594a624ffbda",
-            "keep_locally": true,
-            "name": "nginx:latest",
-            "platform": null,
-            "pull_triggers": null,
-            "repo_digest": "nginx@sha256:08bc36ad52474e528cc1ea3426b5e3f4bad8a130318e3140d6cfe29c8892c7ef",
-            "triggers": null
-          },
-          "sensitive_attributes": [],
-          "private": "bnVsbA=="
-        }
-      ]
-    },
-    {
-      "mode": "managed",
-      "type": "random_password",
-      "name": "random_string",
-      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
-      "instances": [
-        {
-          "schema_version": 3,
-          "attributes": {
-            "bcrypt_hash": "$2a$10$MqQ.EuHwgCRHBAhrUAssE.HkuPLXOE0qvNqp15RGetGLryZ6zk1ru",
-            "id": "none",
-            "keepers": null,
-            "length": 16,
-            "lower": true,
-            "min_lower": 1,
-            "min_numeric": 1,
-            "min_special": 0,
-            "min_upper": 1,
-            "number": true,
-            "numeric": true,
-            "override_special": null,
-            "result": "Q4mZIsPyc6PAl8xG",
-            "special": false,
-            "upper": true
-          },
-          "sensitive_attributes": []
-        }
-      ]
-    }
-  ],
+  "resources": [],
   "check_results": null
 }
 ```
 9. Объясните, почему при этом не был удален docker образ **nginx:latest** ? Ответ подкрепите выдержкой из документации провайдера.
 ```
-Образы Docker имеют промежуточные уровни, которые повышают возможность повторного использования.
+keep_locally (логическое значение) Если true, образ Docker не будет удален при операции уничтожения. 
+Если это неверно, он удалит образ из локального хранилища докера при операции уничтожения.
+[Документация провайдера](https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs/resources/image)
 ```
 ------
 
