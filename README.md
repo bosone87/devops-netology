@@ -62,9 +62,10 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 keep_locally (логическое значение) Если true, образ Docker не будет удален при операции уничтожения. 
 Если это неверно, он удалит образ из локального хранилища докера при операции уничтожения.
 ```
-[Документация провайдера](https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs/resources/image)
-------
+[**Документация провайдера**](https://docs.comcloud.xyz/providers/kreuzwerker/docker/latest/docs/resources/image)
 
+
+------
 
 ### Задание 2*
 
