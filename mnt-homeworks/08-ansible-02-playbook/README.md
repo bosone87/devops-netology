@@ -82,21 +82,21 @@ vector:
   <img width="1200 height="600" src="/img/mnt-02-7.png">
 </p>
 
-9. Подготовьте README.md-файл по своему playbook. В нём должно быть описано: что делает playbook, какие у него есть параметры и теги. Пример качественной документации ansible playbook по [ссылке](https://github.com/opensearch-project/ansible-playbook).
-***site.yml*** - состоит из:
-двух play - Install Clickhouse и Install Vector.
-***handlers*** - одна задача по перезагрузке Clickhouse-server, другая по перезагрузке vector. Вызывается один раз, в конце, через notify.
-***tasks*** - задачи выполняющися на хостах разделены на логические группы задач block/rescue:
-*ansible.builtin.get_url* - позволяет получить нужный дистрибутив в нужное расположение.
-*ansible.builtin.apt* - позволяет установить пакеты .deb.
-*ansible.builtin.meta: flush_handlers* - запуск handler в середине инструкции.
-*ansible.builtin.command* - выполнение комманд (в данном случае, подключение и создание db)
-*ansible.builtin.file* - директория для vector config.
-*ansible.builtin.template* - путь к шаблону.
+9. Подготовьте README.md-файл по своему playbook. В нём должно быть описано: что делает playbook, какие у него есть параметры и теги. Пример качественной документации ansible playbook по [ссылке](https://github.com/opensearch-project/ansible-playbook).\
+***site.yml*** - состоит из:\
+двух play - Install Clickhouse и Install Vector.\
+***handlers*** - одна задача по перезагрузке Clickhouse-server, другая по перезагрузке vector. Вызывается один раз, в конце, через notify.\
+***tasks*** - задачи выполняющися на хостах разделены на логические группы задач block/rescue:\
+*ansible.builtin.get_url* - позволяет получить нужный дистрибутив в нужное расположение.\
+*ansible.builtin.apt* - позволяет установить пакеты .deb.\
+*ansible.builtin.meta: flush_handlers* - запуск handler в середине инструкции.\
+*ansible.builtin.command* - выполнение комманд (в данном случае, подключение и создание db)\
+*ansible.builtin.file* - директория для vector config.\
+*ansible.builtin.template* - путь к шаблону.\
 
-*become: true* - повышение привилегий для запуска задачи.
-*become_method: sudo* - используемый метод повышения привилегий.
+*become: true* - повышение привилегий для запуска задачи.\
+*become_method: sudo* - используемый метод повышения привилегий.\
 
-10.   Готовый playbook выложите в свой репозиторий, поставьте тег `08-ansible-02-playbook` на фиксирующий коммит, в ответ предоставьте ссылку на него.
+10. Готовый playbook выложите в свой репозиторий, поставьте тег `08-ansible-02-playbook` на фиксирующий коммит, в ответ предоставьте ссылку на него.
 
 ---
