@@ -1,0 +1,24 @@
+- name: Get vector
+  ansible.builtin.get_url:
+    url: "https://packages.timber.io/vector/{{ vector_version }}/vector_{{ vector_version }}-1_amd64.deb"
+    dest: "./vector_{{ vector_version }}-1_amd64.deb"
+    mode: "0644"
+- name: Install vector
+  become: true
+  become_method: sudo
+  ansible.builtin.apt:
+    deb: "./{{ item }}"
+  with_items:
+      - vector_{{ vector_version }}-1_amd64.deb
+- name: Flush handlers to restart vector
+  ansible.builtin.meta: flush_handlers
+- name: Configure Vector | ensure what directory exists
+  ansible.builtin.file:
+    path: "{{ vector_config_dir }}"
+    state: directory
+    mode: "0644"
+- name: Configure Vector | Template config
+  ansible.builtin.template:
+    src: "templates/vector.yml.j2"
+    mode: "0644"
+    dest: "{{ vector_config_dir }}/vector.yaml"

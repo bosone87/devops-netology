@@ -1,0 +1,6 @@
+- name: Install vector on centos8
+  import_tasks: centos8.yml
+  when: ansible_facts.os_family == "RedHat"
+- name: Install vector on ubuntu
+  import_tasks: ubuntu.yml
+  when: ansible_facts.os_family == "Debian"

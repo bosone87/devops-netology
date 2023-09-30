@@ -1,0 +1,32 @@
+- name: Appstream1
+  ansible.builtin.raw: "sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*"
+  changed_when: false
+- name: Appstream2
+  ansible.builtin.raw: "sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*"
+  changed_when: false
+
+- name: Get vector
+  become: true
+  ansible.builtin.get_url:
+    url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm"
+    dest: "./vector-{{ vector_version }}.rpm"
+    mode: "0644"
+- name: Install vector
+  become: true
+  ansible.builtin.yum:
+    disable_gpg_check: true
+    name:
+      - vector-{{ vector_version }}.rpm
+    state: present
+- name: Flush handlers to restart vector
+  ansible.builtin.meta: flush_handlers
+- name: Configure Vector | ensure what directory exists
+  ansible.builtin.file:
+    path: "{{ vector_config_dir }}"
+    state: directory
+    mode: "0644"
+- name: Configure Vector | Template config
+  ansible.builtin.template:
+    src: "templates/vector.yml.j2"
+    mode: "0644"
+    dest: "{{ vector_config_dir }}/vector.yaml"
